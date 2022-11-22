@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Países - JSON</title>
+</head>
+<body>
+    <div id="paises"></div>
+    <script>
+        var paises = document.getElementById("paises");
+        fetch("paises.json") //Es una promesa (porque no sabemos que se va a cumplir) que trae los datos de datos.json
+        .then(Response => { //cuando se cumple el fetch, esta es la respuesta
+            Response.json().then(datos =>{
+                datos.forEach( registro =>{
+                    let nombre = document.createElement("p");
+                    nombre.textContent = "País: " + registro.CountryName + ", Capital: " + registro.CapitalName;
+                    paises.appendChild(nombre);
+
+                    let imagen = document.createElement("img");
+                    imagen.setAttribute("src","https://countryflagsapi.com/png/" + registro.CountryName);
+                    paises.appendChild(imagen);
+
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>
